@@ -1,7 +1,9 @@
 package com.dag.hacettepemobil.component.hacettepebutton
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
@@ -27,11 +29,12 @@ fun HacettepeButton(
 ) {
     TextButton(
         modifier = modifier
-            .width(100.dp)
-            .height(50.dp)
-            .background(Color.Transparent),
+            .fillMaxWidth()
+            .height(100.dp)
+            .background(Color.Transparent)
+            .padding(10.dp),
         shape = RoundedCornerShape(50),
-        colors = ButtonDefaults.buttonColors(contentColor = Color.Blue),
+        colors = ButtonDefaults.buttonColors(backgroundColor =  if (isPrimary) Color.Blue else Color.Red),
         onClick = onClick,
         enabled = isEnabled
     ){
@@ -44,11 +47,26 @@ fun HacettepeButton(
 
 @Preview(showBackground = true)
 @Composable
-fun HacettepeButtonPreview() {
+fun HacettepeButtonPrimaryPreview() {
     HacettepeMobilTheme {
         HacettepeButton(
             modifier = Modifier,
             buttonText = R.string.app_name,
+            isPrimary = true,
+            onClick = {}
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun HacettepeButtonSecondaryPreview() {
+    HacettepeMobilTheme {
+        HacettepeButton(
+            modifier = Modifier,
+            buttonText = R.string.app_name,
+            isPrimary = false,
             onClick = {}
         )
     }
