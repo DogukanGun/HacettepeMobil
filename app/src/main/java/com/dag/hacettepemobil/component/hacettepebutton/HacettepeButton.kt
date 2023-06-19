@@ -1,16 +1,16 @@
 package com.dag.hacettepemobil.component.hacettepebutton
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,21 +27,41 @@ fun HacettepeButton(
     isPrimary: Boolean = true,
     onClick: () -> Unit
 ) {
+
+
     TextButton(
         modifier = modifier
             .fillMaxWidth()
             .height(100.dp)
             .background(Color.Transparent)
-            .padding(10.dp),
+            .padding(10.dp)
+            .clip(RoundedCornerShape(32.5.dp)),
         shape = RoundedCornerShape(50),
-        colors = ButtonDefaults.buttonColors(backgroundColor =  if (isPrimary) Color.Blue else Color.Red),
-        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color.Transparent,
+            contentColor = Color.White
+        ),        onClick = onClick,
+        elevation = ButtonDefaults.elevation(0.dp),
         enabled = isEnabled
     ){
-        Text(
-            text = stringResource(id = buttonText),
-            color = Color.White
-        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(Color(0xFF007CEF), Color(0xFF0007A5)),
+                        startX = 0f,
+                        endX = Float.POSITIVE_INFINITY
+                    )
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = stringResource(id = buttonText),
+                color = Color.White
+            )
+        }
+
     }
 }
 
