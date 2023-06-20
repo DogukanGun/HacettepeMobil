@@ -2,4 +2,8 @@
     <string name="app_name">HacettepeMobil</string>
     <string name="title_activity_onboard">OnboardActivity</string>
     <string name="permission_text_1">Bildirimleri Etkinleştir</string>
+    <string name="permission_text_2">Konumu Etkinleştir</string>
+    <string name="permission_skip">Atla</string>
+    <string name="language_title">Uygulama Dilini Seçin</string>
+    <string name="okay">Tamam</string>
 </resources>

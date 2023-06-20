@@ -13,7 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.dag.hacettepemobil.navigation.NavGraph
 import com.dag.hacettepemobil.navigation.NavScreen
 import com.dag.hacettepemobil.ui.theme.HacettepeMobilTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnboardActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

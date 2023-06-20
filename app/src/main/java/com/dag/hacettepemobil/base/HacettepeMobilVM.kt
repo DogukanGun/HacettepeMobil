@@ -28,7 +28,7 @@ abstract class HacettepeMobilVM : ViewModel() {
 
     fun isLoading() = loading.distinctUntilChanged()
 
-    private fun postViewEffect(effect: HacettepeMobilVS) {
+    protected fun postViewEffect(effect: HacettepeMobilVS) {
         viewState.value = effect
     }
 
