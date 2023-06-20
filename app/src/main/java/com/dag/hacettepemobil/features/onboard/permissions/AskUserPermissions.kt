@@ -8,6 +8,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -16,12 +17,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dag.hacettepemobil.R
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.dag.hacettepemobil.component.hacettepebutton.HacettepeButton
+import com.dag.hacettepemobil.navigation.NavScreen
 import com.dag.hacettepemobil.ui.theme.HacettepeMobilTheme
 
 @Composable
 fun UserPermissionOnboard(
-    viewModel: AskUserPermissionsVM = viewModel()
+    viewModel: AskUserPermissionsVM = viewModel(),
+    navController: NavHostController,
 ){
     val permissions = arrayOf(
         arrayOf(android.Manifest.permission.ACCESS_NOTIFICATION_POLICY),
@@ -38,17 +43,20 @@ fun UserPermissionOnboard(
             viewModel.changeState()
         }
     }
-    when(viewModel.askUserPermissionVs){
-        is AskUserPermissionVS.NotificationPermission ->{
-            viewModel.askNotificationPermission()
-        }
-        is AskUserPermissionVS.LocationPermission ->{
-            viewModel.askLocationPermission()
-        }
-        AskUserPermissionVS.PermissionDone ->{
-            //
+    LaunchedEffect(key1 = viewModel.askUserPermissionVs){
+        when(viewModel.askUserPermissionVs){
+            is AskUserPermissionVS.NotificationPermission ->{
+                viewModel.askNotificationPermission()
+            }
+            is AskUserPermissionVS.LocationPermission ->{
+                viewModel.askLocationPermission()
+            }
+            AskUserPermissionVS.PermissionDone ->{
+                navController.navigate(NavScreen.LanguageSelection.route)
+            }
         }
     }
+
     Scaffold {
         Column(
             modifier = Modifier
@@ -80,6 +88,8 @@ fun UserPermissionOnboard(
 @Composable
 fun UserPermissionOnboardPreview(){
     HacettepeMobilTheme {
-        UserPermissionOnboard()
+        UserPermissionOnboard(
+            navController =  rememberNavController(),
+            )
     }
 }

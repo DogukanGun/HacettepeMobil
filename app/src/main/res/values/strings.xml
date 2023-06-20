@@ -6,4 +6,10 @@
     <string name="permission_skip">Atla</string>
     <string name="language_title">Uygulama Dilini Seçin</string>
     <string name="okay">Tamam</string>
+    <string name="title_activity_userop">UseropActivity</string>
+    <string name="login_email" translatable="false">Email</string>
+    <string name="login_password" translatable="false">Sifre</string>
+    <string name="login_button_primary" translatable="false">Giris Yap</string>
+    <string name="login_button_secondary" translatable="false">Kayit Ol</string>
+
 </resources>

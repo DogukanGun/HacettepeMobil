@@ -38,7 +38,6 @@ fun HacettepeField(
         Text(
             text = stringResource(id = labelId),
             style = MaterialTheme.typography.h6,
-            modifier = Modifier.padding(start = 35.dp)
         )
         TextField(
             value = value.value,
@@ -55,7 +54,7 @@ fun HacettepeField(
             shape = RoundedCornerShape(50),
             modifier = modifier
                 .height(60.dp)
-                .padding(start = 35.dp, top = 8.dp)
+                .padding(top = 8.dp)
                 .fillMaxWidth(1f)
                 .shadow(
                     elevation = 5.dp,

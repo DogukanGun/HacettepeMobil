@@ -1,7 +1,9 @@
 package com.dag.hacettepemobil.features.onboard.language
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -10,6 +12,7 @@ import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,17 +26,28 @@ import com.dag.hacettepemobil.component.hacettepebutton.HacettepeButton
 import com.dag.hacettepemobil.data.LanguageModel
 import com.dag.hacettepemobil.ui.theme.HacettepeMobilTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.dag.hacettepemobil.navigation.NavScreen
 
 @Composable
 fun LanguageSelection(
-    modifier: Modifier,
     settingsService: SettingsService,
-    viewModel:LanguageVM = viewModel()
-) {
+    viewModel:LanguageVM = viewModel(),
+    navController: NavHostController,
+    ) {
+    LaunchedEffect(key1 = viewModel.languageVS){
+        when(viewModel.languageVS){
+            LanguageVS.GoToLoginPage ->{
+                navController.navigate(NavScreen.Login.route)
+            }
+            else -> {}
+        }
+    }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
     ) {
         Image(
@@ -57,7 +71,7 @@ fun LanguageSelection(
                 items(settingsService.getLanguages()) { language ->
                     LanguageListItem(
                         languageModel = language,
-                        isRowSelected = language == viewModel.selectedLanguage
+                        isRowSelected = language.name == viewModel.selectedLanguage?.name
                     ){
                         viewModel.selectedLanguage = language
                     }
@@ -69,6 +83,7 @@ fun LanguageSelection(
             buttonText = R.string.okay,
             isEnabled = viewModel.isButtonActive(),
             onClick = {
+                viewModel.saveLanguage()
             }
         )
     }
@@ -84,7 +99,10 @@ fun LanguageListItem(
         modifier = Modifier
             .height(60.dp)
             .fillMaxWidth()
-            .padding(horizontal = 10.dp),
+            .padding(horizontal = 10.dp)
+            .clickable {
+                listItemClick()
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -153,8 +171,8 @@ fun CustomRadioButton(
 fun LanguageSelectionPreview() {
     HacettepeMobilTheme {
         LanguageSelection(
-            modifier = Modifier.background(Color.White),
-            settingsService = SettingsService()
+            settingsService = SettingsService(),
+            navController = rememberNavController()
         )
     }
 }

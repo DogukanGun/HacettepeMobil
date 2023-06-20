@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dag.hacettepemobil">
 
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
+        android:name=".base.HacettepeApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,9 +16,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".base.HacettepeApplication"
         android:theme="@style/Theme.HacettepeMobil"
         tools:targetApi="31">
+        <activity
+            android:name=".UseropActivity"
+            android:exported="false"
+            android:label="@string/title_activity_userop"
+            android:theme="@style/Theme.HacettepeMobil" />
         <activity
             android:name=".features.onboard.OnboardActivity"
             android:exported="true"

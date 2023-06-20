@@ -22,8 +22,8 @@ class AskUserPermissionsVM @Inject constructor():HacettepeMobilVM() {
     )
 
     var askUserPermissionVs by mutableStateOf<AskUserPermissionVS>(notificationState)
-    var buttonText by mutableStateOf(0)
-    var image by mutableStateOf(0)
+    var buttonText by mutableStateOf(R.string.permission_text_1)
+    var image by mutableStateOf(R.drawable.ic_permission_1)
     var permissionIndex by mutableStateOf(0)
 
 
@@ -35,7 +35,7 @@ class AskUserPermissionsVM @Inject constructor():HacettepeMobilVM() {
     fun askLocationPermission(){
         buttonText = locationState.text
         image = locationState.image
-        permissionIndex = permissionIndex+1
+        permissionIndex += 1
     }
 
     fun changeState(){
