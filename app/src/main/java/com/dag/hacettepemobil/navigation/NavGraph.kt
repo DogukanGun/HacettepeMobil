@@ -21,6 +21,8 @@ import com.dag.hacettepemobil.features.onboard.language.LanguageVM
 import com.dag.hacettepemobil.features.onboard.login.Login
 import com.dag.hacettepemobil.features.onboard.permissions.AskUserPermissionsVM
 import com.dag.hacettepemobil.features.onboard.permissions.UserPermissionOnboard
+import com.dag.hacettepemobil.features.onboard.register.Register
+import com.dag.hacettepemobil.features.onboard.resetpassword.ResetPassword
 
 @Composable
 fun NavGraph(
@@ -61,7 +63,10 @@ fun NavGraph(
                 )
             }
             composable(NavScreen.Login.route){
-                Login(settingsService = settingsService)
+                Login(
+                    settingsService = settingsService,
+                    navController = navController
+                )
                 if (isOnboard) {
                     val lifecycleOwner = LocalLifecycleOwner.current
                     val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
@@ -82,6 +87,14 @@ fun NavGraph(
                     }
                 }
 
+            }
+            composable(NavScreen.Register.route){
+                Register()
+            }
+            composable(NavScreen.ResetPassword.route){
+                ResetPassword(
+                    navController = navController
+                )
             }
         }
     }

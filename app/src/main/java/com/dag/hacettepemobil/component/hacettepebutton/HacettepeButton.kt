@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -29,7 +30,7 @@ fun HacettepeButton(
     onClick: () -> Unit
 ) {
     val primaryColor = Brush.horizontalGradient(
-        colors = listOf(Color(0xFF007CEF), Color(0xFF0007A5)),
+        colors = listOf(MaterialTheme.colors.primary,MaterialTheme.colors.secondaryVariant),
         startX = 0f,
         endX = Float.POSITIVE_INFINITY
     )
@@ -59,6 +60,7 @@ fun HacettepeButton(
         Text(
             text = stringResource(id = buttonText),
             color = if(isPrimary) Color.White else Color.Black,
+            style = MaterialTheme.typography.h3
         )
     }
 }

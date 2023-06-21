@@ -2,9 +2,7 @@ package com.dag.hacettepemobil.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
-
-//TODO content colors should be defined here
+val NightBlue = Color(0xFF010445)
+val DarkBlue = Color(0xFF020860)
+val DarkRoyalBlue = Color(0xFF030B77)
+val SilverGray = Color(0xFFCECAC5)

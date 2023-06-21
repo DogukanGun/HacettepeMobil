@@ -11,5 +11,13 @@
     <string name="login_password" translatable="false">Sifre</string>
     <string name="login_button_primary" translatable="false">Giris Yap</string>
     <string name="login_button_secondary" translatable="false">Kayit Ol</string>
+    <string name="reset_password">Sifre yenile</string>
+    <string name="register_name">Adınız</string>
+    <string name="register_surname">Soyadınız</string>
+    <string name="register_email">E-Posta Adresiniz</string>
+    <string name="register_password">Şifre Oluşturun</string>
+    <string name="register_password_repeat">Şifreyi Tekrar Girin</string>
+    <string name="reset_password_step1_title">Şifreni yenileyebilmemiz için lütfen kayıtlı e-posta adresini gir.</string>
+    <string name="reset_password_step1_email">Kayıtlı E-Posta Adresiniz</string>
 
 </resources>
