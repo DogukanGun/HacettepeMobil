@@ -23,6 +23,7 @@ import com.dag.hacettepemobil.features.onboard.permissions.AskUserPermissionsVM
 import com.dag.hacettepemobil.features.onboard.permissions.UserPermissionOnboard
 import com.dag.hacettepemobil.features.onboard.register.Register
 import com.dag.hacettepemobil.features.onboard.resetpassword.ResetPassword
+import com.dag.hacettepemobil.features.onboard.resetpassword.ResetPasswordVM
 
 @Composable
 fun NavGraph(
@@ -92,8 +93,10 @@ fun NavGraph(
                 Register()
             }
             composable(NavScreen.ResetPassword.route){
+                val viewModel = hiltViewModel<ResetPasswordVM>()
                 ResetPassword(
-                    navController = navController
+                    navController = navController,
+                    viewModel = viewModel
                 )
             }
         }

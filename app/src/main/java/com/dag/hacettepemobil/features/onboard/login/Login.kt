@@ -63,7 +63,9 @@ fun Login(
             modifier = Modifier
                 .background(Color.White)
         )
-        TextButton(onClick = { /*TODO*/ }) {
+        TextButton(onClick = {
+            navController.navigate(NavScreen.ResetPassword.route)
+        }) {
             Text(
                 text = stringResource(id = R.string.reset_password),
                 color = Color.Black

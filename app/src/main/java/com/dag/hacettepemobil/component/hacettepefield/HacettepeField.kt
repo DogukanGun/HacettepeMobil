@@ -28,6 +28,7 @@ fun HacettepeField(
     value: MutableState<String>,
     onValueChange: (String) -> Unit,
     labelId: Int,
+    placeholder:String = "",
     modifier: Modifier
 ){
     Column(
@@ -37,7 +38,7 @@ fun HacettepeField(
     ) {
         Text(
             text = stringResource(id = labelId),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.h3,
         )
         TextField(
             value = value.value,
@@ -50,10 +51,10 @@ fun HacettepeField(
                 textColor = MaterialTheme.colors.primary
             ),
             onValueChange = { newValue:String -> onValueChange(newValue) },
-            placeholder = { Text(text = stringResource(id = labelId))},
+            placeholder = { Text(text = placeholder)},
             shape = RoundedCornerShape(50),
             modifier = modifier
-                .height(60.dp)
+                .height(50.dp)
                 .padding(top = 8.dp)
                 .fillMaxWidth(1f)
                 .shadow(

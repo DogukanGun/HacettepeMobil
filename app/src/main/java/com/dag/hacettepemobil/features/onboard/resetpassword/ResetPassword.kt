@@ -3,8 +3,11 @@ package com.dag.hacettepemobil.features.onboard.resetpassword
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,15 +26,22 @@ import androidx.navigation.compose.rememberNavController
 import com.dag.hacettepemobil.R
 import com.dag.hacettepemobil.component.hacettepebutton.HacettepeButton
 import com.dag.hacettepemobil.component.hacettepefield.HacettepeField
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dag.hacettepemobil.navigation.NavScreen
 import com.dag.hacettepemobil.ui.theme.HacettepeMobilTheme
 
 @Composable
 fun ResetPassword(
-    navController:NavController
+    navController:NavController,
+    viewModel:ResetPasswordVM = viewModel()
 ){
-    val email = remember { mutableStateOf("") }
-
+    val firstTextField = remember { mutableStateOf("") }
+    val secondTextField = remember { mutableStateOf("") }
+    LaunchedEffect(key1 = viewModel.screenState){
+        if (viewModel.screenState == ResetPasswordVS.PasswordChanged){
+            navController.navigate(NavScreen.Login.route)
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,7 +53,7 @@ fun ResetPassword(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Image(
-                painter = painterResource(R.drawable.ic_permission_2),
+                painter = painterResource(viewModel.imageResId),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth(fraction = 0.5f)
@@ -52,7 +62,7 @@ fun ResetPassword(
                 contentScale = ContentScale.Fit
             )
             Text(
-                text = stringResource(id = R.string.reset_password_step1_title),
+                text = stringResource(id = viewModel.imageTextResId),
                 color = Color.Gray,
                 fontSize = 16.sp,
                 fontFamily = FontFamily.Default,
@@ -62,21 +72,49 @@ fun ResetPassword(
                 textAlign = TextAlign.Center,
             )
             HacettepeField(
-                value = email,
-                labelId = R.string.reset_password_step1_email,
-                onValueChange = {
-                    email.value = it
+                value = firstTextField,
+                labelId = viewModel.firstTextFieldData.textId,
+                placeholder = viewModel.firstTextFieldData.placeholder,                onValueChange = {
+                    firstTextField.value = it
                 },
                 modifier = Modifier
                     .background(Color.White)
             )
+            if (viewModel.secondFieldVisibility){
+                HacettepeField(
+                    value = secondTextField,
+                    labelId = viewModel.secondTextFieldData.textId,
+                    placeholder = viewModel.secondTextFieldData.placeholder,
+                    onValueChange = {
+                        secondTextField.value = it
+                    },
+                    modifier = Modifier
+                        .background(Color.White)
+                )
+            }
+            if (viewModel.sendCodeAgainVisibility){
+                TextButton(
+                    onClick = {},
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                ){
+                    Text(
+                        text = "Yeniden Kod Gönder >",
+                        style = MaterialTheme.typography.h3
+                    )
+                }
+                Text(
+                    text = "Gönderilen kod  5 dakika boyunca geçerlidir.",
+                    style = MaterialTheme.typography.body2
+                )
+            }
         }
         HacettepeButton(
             modifier = Modifier
                 .padding(bottom = 32.dp),
-            buttonText = R.string.login_button_secondary,
+            buttonText = viewModel.buttonTextId,
             onClick = {
-                navController.navigate(NavScreen.Register.route)
+                viewModel.changeState()
             }
         )
     }
